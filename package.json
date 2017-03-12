@@ -1,0 +1,29 @@
+{
+  "name": "qcc",
+  "version": "0.1.0",
+  "description": "Online quick multi currency converter.",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rhaldkhein/qcc.git"
+  },
+  "keywords": [
+    "currency",
+    "converter",
+    "quick",
+    "multi",
+    "online"
+  ],
+  "author": "Kevin <undyingmind@gmail.com> (https://github.com/rhaldkhein)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rhaldkhein/qcc/issues"
+  },
+  "homepage": "https://github.com/rhaldkhein/qcc#readme",
+  "dependencies": {
+    "mithril": "^1.0.1"
+  }
+}
