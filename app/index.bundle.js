@@ -330,8 +330,9 @@ window.onload = function() {
 				if (!err) {
 					m.mount(document.getElementById('root'), {
 						view: function() {
-							// console.info('Redraw');
-							return m('div',
+							return m('div#converter', {
+									class: 'pure-form'
+								},
 								m('table',
 									_.map(App.collection, function(item, index) {
 										return m(ComItem, {
@@ -343,8 +344,11 @@ window.onload = function() {
 										});
 									})
 								),
-								m('button', 'Convert'),
 								m('button', {
+									class: 'pure-button pure-button-primary'
+								}, 'Convert'),
+								m('button', {
+									class: 'pure-button',
 									onclick: App.addItem
 								}, 'Add')
 							);
@@ -401,6 +405,7 @@ module.exports = {
 			),
 			m('td',
 				m('button', {
+					class: 'pure-button',
 					onclick: function() {
 						App.removeItem(node.attrs.index);
 					}

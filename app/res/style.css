@@ -1,0 +1,36 @@
+
+header, footer {
+	text-align: center;
+	color: #333;
+}
+
+header {
+	margin-bottom: 20px;
+}
+
+footer {
+	font-size: 80%;
+}
+
+footer > span {
+	border-top: 1px solid #aaa;
+	padding: 10px 40px;
+}
+
+#root, #converter {
+	text-align: center;
+	margin-bottom: 40px;
+}
+
+#converter table {
+	margin: 0 auto 20px;
+}
+
+#converter table td {
+	padding-bottom: 6px;
+	padding-right: 6px;
+}
+
+#converter > button {
+	margin-right: 10px
+}
