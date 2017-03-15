@@ -4,7 +4,7 @@ var _ = require('lodash'),
 // Extract packages into `vendor` bundle
 var bower = [],
     // Node module packages
-    node = ['mithril', 'lodash', 'numeral', 'store', 'jquery', 'bluebird'],
+    node = ['mithril', 'numeral', 'store', 'promise-polyfill', 'money', 'lodash.filter', 'lodash.find', 'lodash.isempty', 'lodash.map', 'lodash.uniq'],
     // Other packages
     other = [],
     vendors = _.union(node, bower, other);
@@ -24,8 +24,7 @@ module.exports = {
         extensions: ['.js', '.json']
     },
     module: {
-        rules: [
-        ]
+        rules: []
     },
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({

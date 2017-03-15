@@ -24,16 +24,16 @@
   },
   "homepage": "https://github.com/rhaldkhein/qcc#readme",
   "dependencies": {
-    "async": "^2.1.5",
-    "bluebird": "^3.5.0",
-    "html2json": "^1.0.2",
-    "jquery": "^3.1.1",
-    "lodash": "^4.17.4",
+    "lodash.filter": "^4.6.0",
+    "lodash.find": "^4.6.0",
+    "lodash.isempty": "^4.4.0",
+    "lodash.map": "^4.6.0",
+    "lodash.uniq": "^4.5.0",
     "mithril": "^1.0.1",
     "money": "^0.2.0",
     "numeral": "^2.0.4",
-    "store": "^2.0.4",
-    "xhr": "^2.4.0"
+    "promise-polyfill": "^6.0.2",
+    "store": "^2.0.4"
   },
   "devDependencies": {
     "gulp-rename": "^1.2.2",
