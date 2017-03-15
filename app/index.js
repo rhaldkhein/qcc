@@ -1,5 +1,9 @@
-var $ = require('jquery');
-var _ = require('lodash');
+if (!window.Promise) window.Promise = require('promise-polyfill');
+var _map = require('lodash.map');
+var _isEmpty = require('lodash.isempty');
+var _uniq = require('lodash.uniq');
+var _find = require('lodash.find');
+var _filter = require('lodash.filter');
 var m = require('mithril');
 var fx = require('money');
 var store = require('store');
@@ -31,7 +35,7 @@ window.App = {
 	read: function() {
 		var firstCurrency;
 		var col = store.get('collection');
-		App.collection = _.map(!_.isEmpty(col) ? col : initial_list, function(item, index) {
+		App.collection = _map(!_isEmpty(col) ? col : initial_list, function(item, index) {
 			if (!index) firstCurrency = item;
 			return {
 				amount: prop(fx(1).from(firstCurrency).to(item)),
@@ -42,7 +46,7 @@ window.App = {
 	},
 
 	write: function() {
-		store.set('collection', _.map(App.collection, function(item) {
+		store.set('collection', _map(App.collection, function(item) {
 			return item.currency();
 		}));
 	},
@@ -67,36 +71,26 @@ window.App = {
 
 	updateRatesTable: function() {
 		return Promise.all([
-			new Promise(function(resolve, reject) {
-				$.ajax({
-					url: urlRatesTable,
-					dataType: 'json',
-					success: function(data) {
-						fx.rates = data.rates;
-						fx.base = data.base;
-						resolve();
-					},
-					error: reject
-				});
+			m.request({
+				url: urlRatesTable
+			}).then(function(data) {
+				fx.rates = data.rates;
+				fx.base = data.base;
+				return data;
 			}),
-			new Promise(function(resolve, reject) {
-				$.ajax({
-					url: urlCurrencyNames,
-					dataType: 'json',
-					success: function(data) {
-						App.currencies = data;
-						resolve();
-					},
-					error: reject
-				});
+			m.request({
+				url: urlCurrencyNames
+			}).then(function(data) {
+				App.currencies = data;
+				return data;
 			})
 		]);
 	},
 
 	convert: function(amount, from, to) {
 		if (!(to instanceof Array)) to = [to];
-		to = _.uniq(to);
-		var result = _.map(to, function(symbol) {
+		to = _uniq(to);
+		var result = _map(to, function(symbol) {
 			return {
 				currency: symbol,
 				amount: fx(amount).from(from).to(symbol)
@@ -105,7 +99,7 @@ window.App = {
 		var item, found;
 		for (var i = App.collection.length - 1; i >= 0; i--) {
 			item = App.collection[i];
-			found = _.find(result, ['currency', item.currency()]);
+			found = _find(result, ['currency', item.currency()]);
 			if (found) {
 				item.amount(found.amount);
 			}
@@ -116,7 +110,7 @@ window.App = {
 
 	changeAmount: function(e, index) {
 		var item = App.collection[index];
-		var to = _.map(_.filter(App.collection, function(n, i) {
+		var to = _map(_filter(App.collection, function(n, i) {
 			return i !== index;
 		}), function(m) {
 			return m.currency();
@@ -148,7 +142,7 @@ window.onload = function() {
 									class: 'pure-form'
 								},
 								m('ul',
-									_.map(App.collection, function(item, index) {
+									_map(App.collection, function(item, index) {
 										return m(ComItem, {
 											index: index,
 											amount: item.amount,

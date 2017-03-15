@@ -1,4 +1,4 @@
-var _ = require('lodash');
+var _map = require('lodash.map');
 var m = require('mithril');
 var numeral = require('numeral');
 
@@ -23,7 +23,7 @@ module.exports = {
 							node.attrs.onchangecurrency(e, node.attrs.index);
 						}
 					},
-					_.map(App.currencies, function(name, symbol) {
+					_map(App.currencies, function(name, symbol) {
 						return m('option', {
 							value: symbol
 						}, name + ' (' + symbol + ')');
