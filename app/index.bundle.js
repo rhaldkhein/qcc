@@ -236,7 +236,7 @@ window.App = {
 	addItem: function() {
 		var lastFrom = App.collection[App.last_from_index];
 		App.collection.push({
-			amount: prop(fx(lastFrom.amount()).from(lastFrom.currency()).to(App.default_currency)),
+			amount: prop(fx(lastFrom ? lastFrom.amount() : 1).from(lastFrom ? lastFrom.currency() : App.default_currency).to(App.default_currency)),
 			currency: prop(App.default_currency, App.write)
 		});
 		process.nextTick(App.write);
@@ -388,7 +388,6 @@ module.exports = {
 				m('select', {
 						value: node.attrs.currency(),
 						onchange: function(e) {
-							// m.withAttr('value', node.attrs.currency)
 							node.attrs.currency(this.value);
 							node.attrs.onchangecurrency(e, node.attrs.index);
 						}
