@@ -147,7 +147,7 @@ window.onload = function() {
 							return m('div#converter', {
 									class: 'pure-form'
 								},
-								m('table',
+								m('ul',
 									_.map(App.collection, function(item, index) {
 										return m(ComItem, {
 											index: index,

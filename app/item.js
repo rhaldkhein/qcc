@@ -4,8 +4,8 @@ var numeral = require('numeral');
 
 module.exports = {
 	view: function(node) {
-		return m('tr',
-			m('td',
+		return m('li',
+			m('span',
 				m('input', {
 					type: 'text',
 					value: numeral(node.attrs.amount()).format('0,0.00'),
@@ -15,7 +15,7 @@ module.exports = {
 					}
 				})
 			),
-			m('td',
+			m('span',
 				m('select', {
 						value: node.attrs.currency(),
 						onchange: function(e) {
@@ -30,7 +30,7 @@ module.exports = {
 					})
 				)
 			),
-			m('td',
+			m('span',
 				m('button', {
 					class: 'pure-button',
 					onclick: function() {
