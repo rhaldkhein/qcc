@@ -194,6 +194,7 @@ var store = __webpack_require__(/*! store */ 6);
 var ComItem = __webpack_require__(/*! ./item */ 9);
 var urlRatesTable = '//openexchangerates.org/api/latest.json?app_id=412c7ea5a585496ca593e6697ce22d9a';
 var urlCurrencyNames = '//openexchangerates.org/api/currencies.json';
+var initial_list = ['USD', 'EUR', 'GBP'];
 
 function prop(val, callback) {
 	var data = val;
@@ -217,7 +218,8 @@ window.App = {
 
 	read: function() {
 		var firstCurrency;
-		App.collection = _.map(store.get('collection') || [], function(item, index) {
+		var col = store.get('collection');
+		App.collection = _.map(!_.isEmpty(col) ? col : initial_list, function(item, index) {
 			if (!index) firstCurrency = item;
 			return {
 				amount: prop(fx(1).from(firstCurrency).to(item)),
