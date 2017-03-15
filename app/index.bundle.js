@@ -388,7 +388,6 @@ module.exports = {
 				m('select', {
 						value: node.attrs.currency(),
 						onchange: function(e) {
-							// m.withAttr('value', node.attrs.currency)
 							node.attrs.currency(this.value);
 							node.attrs.onchangecurrency(e, node.attrs.index);
 						}
