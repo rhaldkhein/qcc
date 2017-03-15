@@ -1,10 +1,11 @@
 var $ = require('jquery');
 var _ = require('lodash');
 var m = require('mithril');
-var async = require('async');
+var fx = require('money');
 var store = require('store');
 var ComItem = require('./item');
-var url = 'https://www.google.com/finance/converter';
+var urlRatesTable = '//openexchangerates.org/api/latest.json?app_id=412c7ea5a585496ca593e6697ce22d9a';
+var urlCurrencyNames = '//openexchangerates.org/api/currencies.json';
 
 function prop(val, callback) {
 	var data = val;
@@ -22,32 +23,95 @@ function prop(val, callback) {
 
 window.App = {
 	default_currency: null,
-	currencies: [],
+	currencies: null,
 	collection: null,
+	last_from_index: null,
+
 	read: function() {
-		App.collection = _.map(store.get('collection') || [], function(item) {
+		var firstCurrency;
+		App.collection = _.map(store.get('collection') || [], function(item, index) {
+			if (!index) firstCurrency = item;
 			return {
-				amount: prop(0),
+				amount: prop(fx(1).from(firstCurrency).to(item)),
 				currency: prop(item, App.write)
 			};
 		});
+		App.last_from_index = 0;
 	},
+
 	write: function() {
 		store.set('collection', _.map(App.collection, function(item) {
 			return item.currency();
 		}));
 	},
-	add: function() {
+
+	addItem: function() {
+		var lastFrom = App.collection[App.last_from_index];
 		App.collection.push({
-			amount: prop(0),
-			currency: prop(App.default_currency.value, App.write)
+			amount: prop(fx(lastFrom.amount()).from(lastFrom.currency()).to(App.default_currency)),
+			currency: prop(App.default_currency, App.write)
 		});
 		process.nextTick(App.write);
 	},
-	remove: function(index) {
+
+	removeItem: function(index) {
 		App.collection.splice(index, 1);
 		process.nextTick(App.write);
 	},
+
+	getName: function(symbol) {
+		return App.currencies[symbol] || 'Unknown';
+	},
+
+	updateRatesTable: function() {
+		return Promise.all([
+			new Promise(function(resolve, reject) {
+				$.ajax({
+					url: urlRatesTable,
+					dataType: 'json',
+					success: function(data) {
+						fx.rates = data.rates;
+						fx.base = data.base;
+						resolve();
+					},
+					error: reject
+				});
+			}),
+			new Promise(function(resolve, reject) {
+				$.ajax({
+					url: urlCurrencyNames,
+					dataType: 'json',
+					success: function(data) {
+						App.currencies = data;
+						resolve();
+					},
+					error: reject
+				});
+			})
+		]);
+	},
+
+	convert: function(amount, from, to) {
+		if (!(to instanceof Array)) to = [to];
+		to = _.uniq(to);
+		var result = _.map(to, function(symbol) {
+			return {
+				currency: symbol,
+				amount: fx(amount).from(from).to(symbol)
+			};
+		});
+		var item, found;
+		for (var i = App.collection.length - 1; i >= 0; i--) {
+			item = App.collection[i];
+			found = _.find(result, ['currency', item.currency()]);
+			if (found) {
+				item.amount(found.amount);
+			}
+		}
+	},
+
+	// EVENTS
+
 	changeAmount: function(e, index) {
 		var item = App.collection[index];
 		var to = _.map(_.filter(App.collection, function(n, i) {
@@ -56,61 +120,29 @@ window.App = {
 			return m.currency();
 		});
 		App.convert(item.amount(), item.currency(), to);
+		App.last_from_index = index;
 	},
-	convert: function(amount, from, to) {
-		if (!(to instanceof Array)) to = [to];
-		to = _.uniq(to);
-		async.mapSeries(to, function(curr, done) {
-			$.ajax({
-				url: url,
-				data: {
-					a: amount,
-					from: from,
-					to: curr
-				},
-				success: function(data) {
-					done(null, {
-						currency: curr,
-						amount: $(data).find('#currency_converter_result span.bld').text() || amount
-					});
-				},
-				error: done
-			});
-		}, function(err, result) {
-			var item, found;
-			for (var i = App.collection.length - 1; i >= 0; i--) {
-				item = App.collection[i];
-				found = _.find(result, ['currency', item.currency()]);
-				if (found) {
-					item.amount(parseFloat(found.amount));
-				}
-			}
-			m.redraw();
-		});
+
+	changeCurrency: function(e) {
+		App.changeAmount(e, App.last_from_index);
 	}
+
 };
 
-function init(data, callback) {
-	$(data).find('select[name="from"] option').each(function(index, item) {
-		item = $(item);
-		App.currencies.push({
-			value: item.val(),
-			text: item.text()
-		});
-	});
-	App.default_currency = App.currencies[0];
+function init(callback) {
+	App.default_currency = fx.base;
 	App.read();
 	process.nextTick(callback);
 }
 
 window.onload = function() {
-	$.ajax({
-		url: url,
-		success: function(data) {
-			init(data, function(err) {
+	App.updateRatesTable()
+		.then(function() {
+			init(function(err) {
 				if (!err) {
 					m.mount(document.getElementById('root'), {
 						view: function() {
+							// console.info('Redraw');
 							return m('div',
 								m('table',
 									_.map(App.collection, function(item, index) {
@@ -118,19 +150,19 @@ window.onload = function() {
 											index: index,
 											amount: item.amount,
 											currency: item.currency,
-											onchangeamount: App.changeAmount
+											onchangeamount: App.changeAmount,
+											onchangecurrency: App.changeCurrency
 										});
 									})
 								),
 								m('button', 'Convert'),
 								m('button', {
-									onclick: App.add
+									onclick: App.addItem
 								}, 'Add')
 							);
 						}
 					});
 				}
 			});
-		}
-	});
+		});
 };
