@@ -32,6 +32,7 @@ module.exports = {
 			),
 			m('td',
 				m('button', {
+					class: 'pure-button',
 					onclick: function() {
 						App.removeItem(node.attrs.index);
 					}
