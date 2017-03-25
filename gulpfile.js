@@ -32,11 +32,11 @@ gulp.task('livereload_reload', function(done) {
 gulp.task('_dev_webpack_app', function() {
 	return gulp.src('')
 		.pipe(webpackStream(require('./webpack.js'), webpack))
-		.pipe(gulp.dest('./app'));
+		.pipe(gulp.dest('./app/dist'));
 });
 
 gulp.task('minify_vendor', function() {
-	return gulp.src('./app/index.vendor.js')
+	return gulp.src('./app/dist/index.vendor.js')
 		.pipe(uglify())
 		.pipe(rename({
 			suffix: '.min'
@@ -45,7 +45,7 @@ gulp.task('minify_vendor', function() {
 });
 
 gulp.task('minify_bundle', function() {
-	return gulp.src('./app/index.bundle.js')
+	return gulp.src('./app/dist/index.bundle.js')
 		.pipe(uglify())
 		.pipe(rename({
 			suffix: '.min'

@@ -35,7 +35,7 @@ footer > span {
     list-style: none;
 }
 
-#converter ul li span > * {
+#converter ul li > span > * {
     margin-bottom: 6px;
     margin-left: 3px;
     margin-right: 3px;
@@ -46,11 +46,15 @@ footer > span {
 }
 
 @media (max-width: 680px) {
-    #converter ul li span {
+    #converter ul li > span {
         display: block;
     }
-    #converter ul li span>* {
+    #converter ul li > span > * {
         width: 80%;
-        display: initial;
+        display: inline-block;
+    }
+    #converter ul li > span * button {
+        width: 60px;
+        float: right;
     }
 }

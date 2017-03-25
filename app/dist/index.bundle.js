@@ -41,12 +41,14 @@ module.exports = {
 				)
 			),
 			m('span',
-				m('button', {
-					class: 'pure-button',
-					onclick: function() {
-						App.removeItem(node.attrs.index);
-					}
-				}, 'X')
+				m('span',
+					m('button', {
+						class: 'pure-button',
+						onclick: function() {
+							App.removeItem(node.attrs.index);
+						}
+					}, 'X')
+				)
 			)
 		);
 	}
