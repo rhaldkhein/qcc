@@ -9,6 +9,7 @@
 !/*.md
 !/*.html
 !/*.js
+!/*.yml
 # Folders
 !/app
 !/test
