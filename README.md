@@ -1,2 +1,4 @@
-# qcc
-Online quick multi currency converter
+# Quick Currency Converter
+Online quick & easy multiple currency converter
+
+[https://rhaldkhein.github.io/qcc](https://rhaldkhein.github.io/qcc)
