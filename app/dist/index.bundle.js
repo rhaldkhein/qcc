@@ -18,7 +18,7 @@ module.exports = {
 			m('span',
 				m('input', {
 					type: 'text',
-					value: numeral(node.attrs.amount()).format('0,0.00'),
+					value: numeral(node.attrs.amount()).format('0 0.00'),
 					onchange: function(e) {
 						node.attrs.amount(this.value);
 						node.attrs.onchangeamount(e, node.attrs.index);
