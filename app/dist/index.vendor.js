@@ -142,7 +142,7 @@
 /******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 28);
+/******/ 	return __webpack_require__(__webpack_require__.s = 29);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -10668,10 +10668,10 @@ module.exports = uniq;
   \**************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
-var engine = __webpack_require__(/*! ../src/store-engine */ 19)
+var engine = __webpack_require__(/*! ../src/store-engine */ 20)
 
-var storages = __webpack_require__(/*! ../storages/all */ 20)
-var plugins = [__webpack_require__(/*! ../plugins/json2 */ 17)]
+var storages = __webpack_require__(/*! ../storages/all */ 21)
+var plugins = [__webpack_require__(/*! ../plugins/json2 */ 18)]
 
 module.exports = engine.createStore(storages, plugins)
 
@@ -11896,14 +11896,15 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(/*! setimmediate */ 16);
+__webpack_require__(/*! setimmediate */ 17);
 exports.setImmediate = setImmediate;
 exports.clearImmediate = clearImmediate;
 
 
 /***/ }),
 /* 15 */,
-/* 16 */
+/* 16 */,
+/* 17 */
 /* unknown exports provided */
 /* all exports used */
 /*!****************************************!*\
@@ -12101,7 +12102,7 @@ exports.clearImmediate = clearImmediate;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../webpack/buildin/global.js */ 0), __webpack_require__(/*! ./../process/browser.js */ 13)))
 
 /***/ }),
-/* 17 */
+/* 18 */
 /* unknown exports provided */
 /* all exports used */
 /*!**********************************!*\
@@ -12112,13 +12113,13 @@ exports.clearImmediate = clearImmediate;
 module.exports = json2Plugin
 
 function json2Plugin() {
-	__webpack_require__(/*! ./lib/json2 */ 18)
+	__webpack_require__(/*! ./lib/json2 */ 19)
 	return {}
 }
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /* unknown exports provided */
 /* all exports used */
 /*!**************************************!*\
@@ -12634,7 +12635,7 @@ if (typeof JSON !== "object") {
 }());
 
 /***/ }),
-/* 19 */
+/* 20 */
 /* unknown exports provided */
 /* all exports used */
 /*!*************************************!*\
@@ -12861,7 +12862,7 @@ function createStore(storages, plugins) {
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /* unknown exports provided */
 /* all exports used */
 /*!*********************************!*\
@@ -12871,17 +12872,17 @@ function createStore(storages, plugins) {
 
 module.exports = {
 	// Listed in order of usage preference
-	'localStorage': __webpack_require__(/*! ./localStorage */ 22),
-	'oldFF-globalStorage': __webpack_require__(/*! ./oldFF-globalStorage */ 24),
-	'oldIE-userDataStorage': __webpack_require__(/*! ./oldIE-userDataStorage */ 25),
-	'cookieStorage': __webpack_require__(/*! ./cookieStorage */ 21),
-	'sessionStorage': __webpack_require__(/*! ./sessionStorage */ 26),
-	'memoryStorage': __webpack_require__(/*! ./memoryStorage */ 23),
+	'localStorage': __webpack_require__(/*! ./localStorage */ 23),
+	'oldFF-globalStorage': __webpack_require__(/*! ./oldFF-globalStorage */ 25),
+	'oldIE-userDataStorage': __webpack_require__(/*! ./oldIE-userDataStorage */ 26),
+	'cookieStorage': __webpack_require__(/*! ./cookieStorage */ 22),
+	'sessionStorage': __webpack_require__(/*! ./sessionStorage */ 27),
+	'memoryStorage': __webpack_require__(/*! ./memoryStorage */ 24),
 }
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /* unknown exports provided */
 /* all exports used */
 /*!*******************************************!*\
@@ -12953,7 +12954,7 @@ function _has(key) {
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /* unknown exports provided */
 /* all exports used */
 /*!******************************************!*\
@@ -13002,7 +13003,7 @@ function clearAll() {
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /* unknown exports provided */
 /* all exports used */
 /*!*******************************************!*\
@@ -13052,7 +13053,7 @@ function clearAll(key) {
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /* unknown exports provided */
 /* all exports used */
 /*!*************************************************!*\
@@ -13105,7 +13106,7 @@ function clearAll() {
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /* unknown exports provided */
 /* all exports used */
 /*!***************************************************!*\
@@ -13243,7 +13244,7 @@ function _makeIEStorageElFunction() {
 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /* unknown exports provided */
 /* all exports used */
 /*!********************************************!*\
@@ -13292,8 +13293,8 @@ function clearAll() {
 
 
 /***/ }),
-/* 27 */,
-/* 28 */
+/* 28 */,
+/* 29 */
 /* unknown exports provided */
 /* all exports used */
 /*!**************************************************************************************************************************!*\
