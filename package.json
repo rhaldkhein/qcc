@@ -1,6 +1,6 @@
 {
   "name": "qcc",
-  "version": "0.5.0",
+  "version": "0.2.0",
   "description": "Online quick multi currency converter.",
   "main": "lib/converter.js",
   "scripts": {
