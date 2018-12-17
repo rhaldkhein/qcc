@@ -169,8 +169,6 @@ window.App = {
       aProms.push(oNames && !force ? Promise.resolve(oNames) : m.request({ url: urlCurrencyNames }));
       Promise.all(aProms)
         .then(function (results) {
-          // console.log(results);
-          // results[0].rates.AED += 10;
           fx.rates = results[0].rates;
           fx.base = results[0].base;
           App.currencies = results[1];
