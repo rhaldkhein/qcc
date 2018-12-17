@@ -169,6 +169,8 @@ window.App = {
       aProms.push(oNames && !force ? Promise.resolve(oNames) : m.request({ url: urlCurrencyNames }));
       Promise.all(aProms)
         .then(function (results) {
+          // console.log(results);
+          // results[0].rates.AED += 10;
           fx.rates = results[0].rates;
           fx.base = results[0].base;
           App.currencies = results[1];
@@ -181,6 +183,8 @@ window.App = {
               self.updateRatesTable(true)
             }, 1000);
           }
+          App.default_currency = fx.base;
+          App.read();
           resolve(results);
         })
         .catch(reject);
@@ -225,43 +229,33 @@ window.App = {
 
 };
 
-function init(callback) {
-  App.default_currency = fx.base;
-  App.read();
-  process.nextTick(callback);
-}
-
 window.onload = function () {
   App.updateRatesTable()
     .then(function () {
-      init(function (err) {
-        if (!err) {
-          m.mount(document.getElementById('root'), {
-            view: function () {
-              return m('div#converter', {
-                class: 'pure-form'
-              },
-                m('ul',
-                  _map(App.collection, function (item, index) {
-                    return m(ComItem, {
-                      index: index,
-                      amount: item.amount,
-                      currency: item.currency,
-                      onchangeamount: App.changeAmount,
-                      onchangecurrency: App.changeCurrency
-                    });
-                  })
-                ),
-                m('button', {
-                  class: 'pure-button pure-button-primary'
-                }, 'Convert'),
-                m('button', {
-                  class: 'pure-button',
-                  onclick: App.addItem
-                }, 'Add')
-              );
-            }
-          });
+      m.mount(document.getElementById('root'), {
+        view: function () {
+          return m('div#converter', {
+            class: 'pure-form'
+          },
+            m('ul',
+              _map(App.collection, function (item, index) {
+                return m(ComItem, {
+                  index: index,
+                  amount: item.amount,
+                  currency: item.currency,
+                  onchangeamount: App.changeAmount,
+                  onchangecurrency: App.changeCurrency
+                });
+              })
+            ),
+            m('button', {
+              class: 'pure-button pure-button-primary'
+            }, 'Convert'),
+            m('button', {
+              class: 'pure-button',
+              onclick: App.addItem
+            }, 'Add')
+          );
         }
       });
     });
