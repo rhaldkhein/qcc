@@ -1,47 +1,40 @@
 {
   "name": "qcc",
-  "version": "0.2.1",
-  "description": "Online quick multi currency converter.",
-  "main": "lib/converter.js",
-  "scripts": {
-    "test": "test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rhaldkhein/qcc.git"
-  },
-  "keywords": [
-    "currency",
-    "converter",
-    "quick",
-    "multi",
-    "online"
-  ],
-  "author": "Kevin <undyingmind@gmail.com> (https://github.com/rhaldkhein)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/rhaldkhein/qcc/issues"
-  },
-  "homepage": "https://github.com/rhaldkhein/qcc#readme",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "lodash.filter": "^4.6.0",
-    "lodash.find": "^4.6.0",
-    "lodash.isempty": "^4.4.0",
-    "lodash.map": "^4.6.0",
-    "lodash.uniq": "^4.5.0",
-    "mithril": "^1.0.1",
-    "money": "^0.2.0",
-    "numeral": "^2.0.4",
-    "promise-polyfill": "^6.0.2",
-    "store": "^2.0.4"
+    "@testing-library/jest-dom": "^5.11.6",
+    "@testing-library/react": "^11.1.2",
+    "@testing-library/user-event": "^12.2.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-scripts": "4.0.0",
+    "web-vitals": "^0.2.4",
+    "y-webrtc": "github:yjs/y-webrtc#master",
+    "yjs": "^13.4.4"
   },
-  "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^2.1.0",
-    "run-sequence": "^1.2.2",
-    "tiny-lr": "^1.0.3",
-    "webpack": "^2.2.1",
-    "webpack-stream": "^3.2.0"
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

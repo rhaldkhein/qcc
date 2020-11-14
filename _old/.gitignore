@@ -1,0 +1,18 @@
+# === IGNORE ALL ===
+/*
+
+# === EXCEPT ===
+# Files
+!/.gitignore
+!/LICENSE
+!/*.json
+!/*.md
+!/*.html
+!/*.js
+!/*.yml
+# Folders
+!/app
+!/test
+
+# === INGNORE AGAIN ===
+**/*.DS_Store
