@@ -10,13 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/rhaldkhein/qcc.git"
   },
-  "keywords": [
-    "currency",
-    "converter",
-    "quick",
-    "multi",
-    "online"
-  ],
+  "keywords": ["currency", "converter", "quick", "multi", "online"],
   "author": "Kevin <undyingmind@gmail.com> (https://github.com/rhaldkhein)",
   "license": "MIT",
   "bugs": {
@@ -24,24 +18,8 @@
   },
   "homepage": "https://github.com/rhaldkhein/qcc#readme",
   "dependencies": {
-    "lodash.filter": "^4.6.0",
-    "lodash.find": "^4.6.0",
-    "lodash.isempty": "^4.4.0",
-    "lodash.map": "^4.6.0",
-    "lodash.uniq": "^4.5.0",
-    "mithril": "^1.0.1",
     "money": "^0.2.0",
-    "numeral": "^2.0.4",
-    "promise-polyfill": "^6.0.2",
-    "store": "^2.0.4"
+    "numeral": "^2.0.4"
   },
-  "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^2.1.0",
-    "run-sequence": "^1.2.2",
-    "tiny-lr": "^1.0.3",
-    "webpack": "^2.2.1",
-    "webpack-stream": "^3.2.0"
-  }
+  "devDependencies": {}
 }
